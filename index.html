@@ -269,7 +269,6 @@
         </h2>
       </div>
 
-      <!-- Produtos -->
       <div
         id="tab-content"
         class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-16 max-w-7xl mx-auto px-4"
@@ -280,32 +279,71 @@
           data-tab-panel="novos"
         >
           <img src="/img/produto-1.svg" class="rounded-xl shadow-md" />
-          <p class="mt-4 font-medium">Kit de Pincéis Rosé Gold</p>
-          <p class="font-bold">R$ 59,90</p>
+          <p class="mt-4 fonte-poppins text-center md:text-left">
+            Kit de Pincéis Rosé Gold
+          </p>
+          <p class="font-bold text-center md:text-left">R$ 59,90</p>
+          <button
+            class="mt-2 bg-gray-800 text-white px-2 md:px-4 py-0.5 md:py-2 rounded-full hover:bg-pink-300 transition-transform duration-200 add-to-cart fonte-poppins text-sm md:text-base"
+            data-name="Kit de Pincéis Rosé Gold"
+            data-price="59.90"
+          >
+            Adicionar ao Carrinho
+          </button>
         </div>
+
         <div
           class="tab-panel transition-transform duration-300 hover:scale-110"
           data-tab-panel="novos"
         >
           <img src="/img/produto-2.svg" class="rounded-xl shadow-md" />
-          <p class="mt-4 font-medium">Máscara de Cílios Curvadora</p>
-          <p class="font-bold">R$ 59,90</p>
+          <p class="mt-4 fonte-poppins text-center md:text-left">
+            Máscara de Cílios Curvadora
+          </p>
+          <p class="font-bold text-center md:text-left">R$ 59,90</p>
+          <button
+            class="mt-2 bg-gray-800 text-white px-2 md:px-4 py-0.5 md:py-2 rounded-full hover:bg-pink-300 transition-transform duration-200 add-to-cart fonte-poppins text-sm md:text-base"
+            data-name="Kit de Pincéis Rosé Gold"
+            data-price="59.90"
+          >
+            Adicionar ao Carrinho
+          </button>
         </div>
+
         <div
           class="tab-panel transition-transform duration-300 hover:scale-110"
           data-tab-panel="novos"
         >
           <img src="/img/produto-5.svg" class="rounded-xl shadow-md" />
-          <p class="mt-4 font-medium">Máscara de Cílios</p>
-          <p class="font-bold">R$ 59,90</p>
+          <p class="mt-4 fonte-poppins text-center md:text-left">
+            Máscara de Cílios
+          </p>
+          <p class="font-bold text-center md:text-left">R$ 59,90</p>
+          <button
+            class="mt-2 bg-gray-800 text-white px-2 md:px-4 py-0.5 md:py-2 rounded-full hover:bg-pink-300 transition-transform duration-200 add-to-cart fonte-poppins text-sm md:text-base"
+            data-name="Kit de Pincéis Rosé Gold"
+            data-price="59.90"
+          >
+            Adicionar ao Carrinho
+          </button>
         </div>
+
         <div
           class="tab-panel transition-transform duration-300 hover:scale-110"
           data-tab-panel="novos"
         >
           <img src="/img/produto-4.svg" class="rounded-xl shadow-md" />
-          <p class="mt-4 font-medium">Batom Vermelho Intenso</p>
-          <p class="font-bold">R$ 59,90</p>
+          <p class="mt-4 fonte-poppins text-center md:text-left">
+            Batom Nude Matte
+          </p>
+          <p class="font-bold text-center md:text-left">R$ 59,90</p>
+          <button
+            class="mt-2 bg-gray-800 text-white px-2 md:px-4 py-0.5 md:py-2 rounded-full hover:bg-pink-300 transition-transform duration-200 add-to-cart fonte-poppins text-sm md:text-base"
+            data-name="Kit de Pincéis Rosé Gold"
+            data-price="59.90"
+          >
+            Adicionar ao Carrinho
+          </button>
         </div>
 
         <!-- VENDIDOS -->
@@ -638,51 +676,169 @@
       </section>
     </footer>
 
+    <div
+      id="cart"
+      class="fixed right-0 top-0 w-80 max-w-full h-full bg-gray-200 shadow-lg p-6 z-50 transform translate-x-full transition-transform duration-300"
+    >
+      <h2 class="text-2xl font-bold mb-4 text-[#E89EA7]">Seu Carrinho</h2>
+      <ul id="cart-items" class="space-y-4 text-gray-800"></ul>
+      <p class="mt-4 font-bold">Total: R$ <span id="cart-total">0.00</span></p>
+      <button
+        id="checkout"
+        class="mt-6 w-full bg-[#E89EA7] text-white py-2 rounded hover:bg-pink-300"
+      >
+        Finalizar Pedido
+      </button>
+    </div>
+
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        id="toggle-cart"
+        class="bg-[#E89EA7] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform relative"
+      >
+        🛒
+
+        <span
+          id="cart-badge"
+          class="absolute -top-1.5 -right-1.5 bg-red-500 text-xs text-white font-bold w-5 h-5 flex items-center justify-center rounded-full hidden"
+        >
+          0
+        </span>
+      </button>
+    </div>
+
     <script>
-      // Troca de abas (Produtos em Alta)
+      // Troca de abas
       const tabs = document.querySelectorAll('.tab-item');
       const panels = document.querySelectorAll('.tab-panel');
-    
+
       tabs.forEach((tab) => {
         tab.addEventListener('click', () => {
           tabs.forEach((t) => {
             t.classList.remove(
               'border-[#FECDD3]',
               'text-black',
-              'font-semibold'
+              'font-semibold',
             );
             t.classList.add('border-gray-300', 'text-gray-500');
           });
           tab.classList.remove('border-gray-300', 'text-gray-500');
           tab.classList.add('border-[#FECDD3]', 'text-black', 'font-semibold');
-    
+
           const selected = tab.getAttribute('data-tab');
           panels.forEach((panel) => {
             panel.classList.toggle(
               'hidden',
-              panel.getAttribute('data-tab-panel') !== selected
+              panel.getAttribute('data-tab-panel') !== selected,
             );
           });
         });
       });
-    
-      // Controle do menu hambúrguer
+
       const menuBtn = document.getElementById('menu-btn');
       const mobileMenu = document.getElementById('mobile-menu');
-    
+
       if (menuBtn && mobileMenu) {
         menuBtn.addEventListener('click', () => {
           mobileMenu.classList.toggle('hidden');
         });
-    
-        // Fecha o menu ao clicar em qualquer link dentro dele (opcional)
+
         mobileMenu.querySelectorAll('a').forEach((link) => {
           link.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
           });
         });
       }
+
+      const cart = [];
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      const cartDrawer = document.getElementById('cart');
+      const toggleCartBtn = document.getElementById('toggle-cart');
+      const cartBadge = document.getElementById('cart-badge');
+
+      function updateBadge() {
+        const count = cart.length;
+        if (count > 0) {
+          cartBadge.textContent = count;
+          cartBadge.classList.remove('hidden');
+        } else {
+          cartBadge.classList.add('hidden');
+        }
+      }
+
+      function renderCart() {
+        cartItems.innerHTML = '';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+          total += item.price;
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="font-medium">${item.name}</p>
+                <p class="text-sm text-gray-600">R$ ${item.price.toFixed(2)}</p>
+              </div>
+              <button class="text-red-500 font-bold" onclick="removeFromCart(${index})">×</button>
+            </div>
+          `;
+          cartItems.appendChild(li);
+        });
+
+        cartTotal.innerText = total.toFixed(2);
+        updateBadge();
+      }
+
+      function removeFromCart(index) {
+        cart.splice(index, 1);
+        renderCart();
+      }
+
+      document.querySelectorAll('.add-to-cart').forEach((button) => {
+        button.addEventListener('click', () => {
+          const name = button.getAttribute('data-name');
+          const price = parseFloat(button.getAttribute('data-price'));
+
+          cart.push({ name, price });
+          renderCart();
+
+          button.classList.add('scale-110');
+          setTimeout(() => button.classList.remove('scale-110'), 150);
+        });
+      });
+
+      toggleCartBtn.addEventListener('click', () => {
+        cartDrawer.classList.toggle('translate-x-full');
+      });
+
+      document.getElementById('checkout').addEventListener('click', () => {
+        if (cart.length === 0) return alert('Seu carrinho está vazio!');
+
+        const msg = cart
+          .map((item) => `• ${item.name} - R$ ${item.price.toFixed(2)}`)
+          .join('\n');
+        const total = cart.reduce((acc, item) => acc + item.price, 0);
+        const whatsappMessage = `Olá! Gostaria de fazer o pedido:\n${msg}\n\nTotal: R$ ${total.toFixed(
+          2,
+        )}`;
+
+        const link = `https://wa.me/5534999070357?text=${encodeURIComponent(
+          whatsappMessage,
+        )}`;
+        window.open(link, '_blank');
+      });
+
+      window.removeFromCart = removeFromCart;
+
+      document.addEventListener('click', (event) => {
+        const isClickInsideCart = cartDrawer.contains(event.target);
+        const isClickOnToggleButton = toggleCartBtn.contains(event.target);
+
+        if (!isClickInsideCart && !isClickOnToggleButton) {
+          cartDrawer.classList.add('translate-x-full'); // esconde o carrinho
+        }
+      });
     </script>
-    
   </body>
 </html>
